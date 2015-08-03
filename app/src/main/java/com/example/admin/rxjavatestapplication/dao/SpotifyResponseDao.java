@@ -37,7 +37,7 @@ public class SpotifyResponseDao {
     @Nonnull
     private final Scheduler subscribeOnScheduler;
 
-    int offset = 0;
+    Integer offset = 0;
 
     @Inject
     public SpotifyResponseDao(@Nonnull MyRetroFit retroFit,
@@ -52,10 +52,14 @@ public class SpotifyResponseDao {
                             @Override
                             public Observable<SpotifyResponse> call(SpotifyResponse spotifyResponse) {
                                 if (spotifyResponse == null) {
+
                                     return myRetroFit.listTracks(offset);
 //                                            .subscribeOn(subscribeOnScheduler)
 //                                            .observeOn(observeOnScheduler);
-                                } else {
+                                } else if (spotifyResponse.getTracks().getTotal() < offset) {
+                                        return Observable.never();
+                                    }
+                                else {
                                     offset += 50;
                                     final Observable<SpotifyResponse> apiRequest = myRetroFit
                                             .listTracks(offset);
@@ -95,11 +99,14 @@ public class SpotifyResponseDao {
     private static class MergeTwoResponses implements Func2<SpotifyResponse, SpotifyResponse, SpotifyResponse> {
         @Override
         public SpotifyResponse call(SpotifyResponse previous, SpotifyResponse moreData) {
-            final List<Item> items = ImmutableList.<Item>builder()
-                    .addAll(previous.getTracks().getItems())
-                    .addAll(moreData.getTracks().getItems())
-                    .build();
-            return new SpotifyResponse(new Tracks(items, moreData.getTracks().getOffset()));
+
+
+                final List<Item> items = ImmutableList.<Item>builder()
+                        .addAll(previous.getTracks().getItems())
+                        .addAll(moreData.getTracks().getItems())
+                        .build();
+                return new SpotifyResponse(new Tracks(items, moreData.getTracks().getOffset(), moreData.getTracks().getTotal()));
+
         }
     }
 }

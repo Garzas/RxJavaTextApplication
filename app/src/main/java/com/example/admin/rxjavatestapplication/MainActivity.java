@@ -27,6 +27,7 @@ import butterknife.InjectView;
 import dagger.Provides;
 import rx.Observer;
 import rx.functions.Action1;
+import rx.functions.Func1;
 
 public class MainActivity extends BaseActivity {
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RxjavaTestApplication.iml" filepath="$PROJECT_DIR$/RxjavaTestApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RxJavaTextApplication.iml" filepath="$PROJECT_DIR$/RxJavaTextApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/rx-java-extensions/rx-android-extensions/rx-android-extensions.iml" filepath="$PROJECT_DIR$/rx-java-extensions/rx-android-extensions/rx-android-extensions.iml" />
       <module fileurl="file://$PROJECT_DIR$/rx-java-extensions/rx-extensions/rx-extensions.iml" filepath="$PROJECT_DIR$/rx-java-extensions/rx-extensions/rx-extensions.iml" />
